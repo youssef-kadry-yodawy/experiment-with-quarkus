@@ -13,7 +13,7 @@ import io.quarkus.qute.TemplateInstance;
 import io.smallrye.mutiny.Uni;
 
 import jakarta.inject.Inject;
-
+import jakarta.ws.rs.BeanParam;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -69,15 +69,22 @@ public class PharmacyResource {
         .replaceWith(Response.ok(pharmacy).status(Response.Status.CREATED)::build);
     }
 
+    public static class Parameters {
+        @RestForm
+        String name;
+        @RestForm
+        String address;
+    }
+
     @POST
     @WithTransaction
     @Path("/create_html")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Uni<Response> create_pharmacy_html(@RestForm String name, @RestForm String address) {
+    public Uni<Response> create_pharmacy_html(@BeanParam Parameters param) {
         Pharmacy pharma = new Pharmacy();
-        pharma.name = name;
-        pharma.address = address;
+        pharma.name = param.name;
+        pharma.address = param.address;
         return Panache.withTransaction(pharma::persist)
         .replaceWith(Response.ok(pharma).status(Response.Status.CREATED)::build);
     }
