@@ -1,4 +1,4 @@
-package com.yodawy;
+package com.yodawy.Trials;
 
 import java.util.List;
 
@@ -6,7 +6,6 @@ import org.jboss.resteasy.reactive.RestForm;
 import org.jboss.resteasy.reactive.RestPath;
 
 import io.quarkus.hibernate.reactive.panache.Panache;
-import io.quarkus.hibernate.reactive.panache.common.WithSession;
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
@@ -24,7 +23,6 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-@WithSession
 @Path("/pharmacies")
 public class PharmacyResource {
 
