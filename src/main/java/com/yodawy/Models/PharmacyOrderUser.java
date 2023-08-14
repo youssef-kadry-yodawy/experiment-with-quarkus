@@ -4,11 +4,9 @@ package com.yodawy.Models;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.github.javafaker.Faker;
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
-import io.smallrye.mutiny.Uni;
 import jakarta.persistence.*;
 import org.jboss.resteasy.reactive.RestForm;
 
@@ -55,6 +53,13 @@ public class PharmacyOrderUser extends PanacheEntity{
         name = params.name;
         mobile_number = params.mobile_number;
         age = params.age;
+    }
+
+    public PharmacyOrderUser(Faker faker) {
+        user_global_id = faker.idNumber().valid();
+        name = faker.name().fullName();
+        mobile_number = faker.phoneNumber().cellPhone();
+        age = faker.number().numberBetween(18, 80);
     }
 
 }

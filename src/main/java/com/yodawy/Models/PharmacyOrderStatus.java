@@ -1,8 +1,10 @@
 package com.yodawy.Models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
+import io.smallrye.mutiny.Uni;
 import jakarta.persistence.*;
 import org.jboss.resteasy.reactive.RestForm;
 
@@ -21,6 +23,7 @@ public class PharmacyOrderStatus extends PanacheEntity {
             orphanRemoval = true,
             fetch = FetchType.EAGER
     )
+    @JsonIgnore
     public List<PharmacyOrder> pharmacy_orders;
 
     public static class CreationParameters {
@@ -32,5 +35,20 @@ public class PharmacyOrderStatus extends PanacheEntity {
 
     public PharmacyOrderStatus(CreationParameters params) {
         name = params.name;
+    }
+
+    public PharmacyOrderStatus(String name) {
+        this.name = name;
+    }
+
+    public static Uni<PharmacyOrderStatus> initializePharmacyOrderStatuses() {
+        String[] statuses = {"Received", "Approved", "Rejected", "Cancelled", "Out For Delivery", "Delivered"};
+
+        Uni<PharmacyOrderStatus> train = Uni.createFrom().nullItem();
+        for (String status : statuses) {
+            train = train.replaceWith(new PharmacyOrderStatus(status).persist());
+        }
+
+        return train;
     }
 }

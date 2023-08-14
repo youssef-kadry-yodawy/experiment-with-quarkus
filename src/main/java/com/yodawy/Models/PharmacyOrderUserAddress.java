@@ -3,11 +3,13 @@ package com.yodawy.Models;
 
 // import io.quarkus.hibernate.orm.PersistenceUnit.List;
 import com.fasterxml.jackson.annotation.*;
+import com.github.javafaker.Faker;
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
 import jakarta.persistence.*;
 import org.jboss.resteasy.reactive.RestForm;
 
 import java.util.List;
+import java.util.Random;
 
 @Entity
 @Table(name = "pharmacy_order_user_addresses")
@@ -20,8 +22,8 @@ public class PharmacyOrderUserAddress extends PanacheEntity{
     public String city;
     public String area;
     public String type;
-    public String floor;
-    public String apartment;
+    public Integer floor;
+    public Integer apartment;
     public String landmark;
 
     @ManyToOne
@@ -51,9 +53,9 @@ public class PharmacyOrderUserAddress extends PanacheEntity{
         @RestForm
         public String type;
         @RestForm
-        public String floor;
+        public Integer floor;
         @RestForm
-        public String apartment;
+        public Integer apartment;
         @RestForm
         public String landmark;
 
@@ -75,5 +77,20 @@ public class PharmacyOrderUserAddress extends PanacheEntity{
         landmark = params.landmark;
 
         user_id = params.user_id;
+    }
+
+    public PharmacyOrderUserAddress(Faker faker, PharmacyOrderUser user) {
+        address_global_id = faker.idNumber().invalid();
+        building_number = faker.address().buildingNumber();
+        street_name = faker.address().streetName();
+        city = faker.address().city();
+        area = faker.address().state();
+        String[] types = {"Home", "Office", "Other"};
+        type = types[new Random().nextInt(types.length)];
+        floor = faker.number().numberBetween(0, 20);
+        apartment = faker.number().numberBetween(1, 80);
+        landmark = faker.university().name();
+
+        user_id = user.id;
     }
 }

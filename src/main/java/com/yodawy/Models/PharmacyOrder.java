@@ -2,12 +2,14 @@ package com.yodawy.Models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.github.javafaker.Faker;
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
 import jakarta.persistence.*;
 import org.jboss.resteasy.reactive.RestForm;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Entity
 @Table(name = "pharmacy_orders")
@@ -15,14 +17,14 @@ import java.util.List;
 public class PharmacyOrder extends PanacheEntity {
 
     String order_number;
-    Float total_list_price;
-    Float total_discount;
-    Float delivery_charge;
-    Float net_amount;
+    Double total_list_price;
+    Double total_discount;
+    Double delivery_charge;
+    Double net_amount;
     String order_notes;
     Integer payment_method_id;
-    LocalDateTime accepted_at;
-    LocalDateTime assigned_at;
+    Date accepted_at;
+    Date assigned_at;
 
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
@@ -67,21 +69,21 @@ public class PharmacyOrder extends PanacheEntity {
         @RestForm
         public String order_number;
         @RestForm
-        public Float total_list_price;
+        public Double total_list_price;
         @RestForm
-        public Float total_discount;
+        public Double total_discount;
         @RestForm
-        public Float delivery_charge;
+        public Double delivery_charge;
         @RestForm
-        public Float net_amount;
+        public Double net_amount;
         @RestForm
         public String order_notes;
         @RestForm
         public Integer payment_method_id;
         @RestForm
-        public LocalDateTime accepted_at;
+        public Date accepted_at;
         @RestForm
-        public LocalDateTime assigned_at;
+        public Date assigned_at;
 
         @RestForm
         Long user_id;
@@ -108,5 +110,22 @@ public class PharmacyOrder extends PanacheEntity {
         user_id = params.user_id;
         address_id = params.address_id;
         status_id = params.status_id;
+    }
+
+    public PharmacyOrder(Faker faker, Long user_id, Long address_id) {
+
+        order_number = faker.number().digits(5);
+        total_list_price = faker.number().randomDouble(2,1,500);
+        total_discount = faker.number().randomDouble(2,0,1);
+        delivery_charge = (double) faker.number().numberBetween(10, 20);
+        net_amount = total_list_price * total_discount + delivery_charge;
+        order_notes = faker.bothify("?".repeat(50));
+        payment_method_id = faker.number().numberBetween(0, 2);
+        accepted_at = faker.date().future(1, TimeUnit.HOURS);
+        assigned_at = faker.date().future(1, TimeUnit.HOURS);
+
+        this.user_id = user_id;
+        this.address_id = address_id;
+        this.status_id = (long) faker.number().numberBetween(1, 6);
     }
 }

@@ -2,6 +2,7 @@ package com.yodawy.Models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.github.javafaker.Faker;
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -35,5 +36,11 @@ public class PharmacyOrderImage extends PanacheEntity {
         image_url = params.image_url;
 
         order_id = params.order_id;
+    }
+
+    public PharmacyOrderImage(Faker faker, Long order_id) {
+        image_url = faker.internet().image();
+
+        this.order_id = order_id;
     }
 }
