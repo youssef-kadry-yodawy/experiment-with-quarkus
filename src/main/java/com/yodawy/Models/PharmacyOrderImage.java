@@ -15,7 +15,7 @@ import org.jboss.resteasy.reactive.RestForm;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class PharmacyOrderImage extends PanacheEntity {
 
-    String image_url;
+    public String image_url;
 
     @ManyToOne
     @JoinColumn(name = "order_id", insertable = false, updatable = false)

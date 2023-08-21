@@ -1,0 +1,11 @@
+body {
+    background-color: #F4F5FC;
+    font-family: Nunito Sans;
+    padding-left: 320px;
+    padding-top: 80px;
+    padding-right: 20px;
+}
+
+html, body {
+    margin: 0;
+}

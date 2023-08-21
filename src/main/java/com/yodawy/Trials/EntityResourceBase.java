@@ -1,10 +1,8 @@
 package com.yodawy.Trials;
 
-import com.yodawy.Models.PharmacyOrderUser;
 import io.quarkus.hibernate.reactive.panache.Panache;
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
-import io.quarkus.resteasy.reactive.links.InjectRestLinks;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.SessionScoped;

@@ -16,15 +16,15 @@ import java.util.concurrent.TimeUnit;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class PharmacyOrder extends PanacheEntity {
 
-    String order_number;
-    Double total_list_price;
-    Double total_discount;
-    Double delivery_charge;
-    Double net_amount;
-    String order_notes;
-    Integer payment_method_id;
-    Date accepted_at;
-    Date assigned_at;
+    public String order_number;
+    public Double total_list_price;
+    public Double total_discount;
+    public Double delivery_charge;
+    public Double net_amount;
+    public String order_notes;
+    public Integer payment_method_id;
+    public Date accepted_at;
+    public Date assigned_at;
 
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)

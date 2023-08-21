@@ -9,14 +9,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import org.jboss.resteasy.reactive.RestForm;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "pharmacy_order_images")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class PharmacyCancellationDetail extends PanacheEntity {
 
-    String cancellation_note;
+    public String cancellation_note;
 
     @ManyToOne
     @JoinColumn(name = "order_id", insertable = false, updatable = false)

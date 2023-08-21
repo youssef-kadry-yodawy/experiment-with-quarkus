@@ -1,0 +1,27 @@
+.orders-page {
+    display: flex;
+    flex-direction: row;
+}
+
+.order-selection-block {
+    position: fixed;
+    top: 80px;
+    bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    z-index: 10;
+}
+
+.order-details-block {
+    position: fixed;
+    top: 80px;
+    bottom: 20px;
+    left: 620px;
+    right: 20px;
+    min-width: 850px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    z-index: 10;
+}

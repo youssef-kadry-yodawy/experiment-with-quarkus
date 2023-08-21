@@ -19,6 +19,7 @@ public class PharmacyOrderUser extends PanacheEntity{
     public String name;
     public String mobile_number;
     public int age;
+    
     @OneToMany(
             mappedBy = "pharmacy_order_user",
             cascade = CascadeType.ALL,

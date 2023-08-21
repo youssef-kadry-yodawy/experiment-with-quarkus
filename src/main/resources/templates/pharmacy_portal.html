@@ -1,0 +1,137 @@
+{@com.yodawy.Models.PharmacyOrder selected_order}
+
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Pharmacy Portal</title>
+
+        <!-- Fonts -->
+        <link href='https://fonts.googleapis.com/css?family=Nunito Sans' rel='stylesheet'>
+
+        <!-- Styles -->
+        <link href="/css/general.css" rel="stylesheet">
+        <link href="/css/header.css" rel="stylesheet">
+        <link href="/css/sidebar.css" rel="stylesheet">
+        <link href="/css/orders-page.css" rel="stylesheet">
+        <link href="/css/orders-list.css" rel="stylesheet">
+        <link href="/css/order-details.css" rel="stylesheet">
+        <link href="/css/elapsed-time.css" rel="stylesheet">
+        <link href="/css/order-details-footer.css" rel="stylesheet">
+
+        <!-- htmx -->
+        <script src="/javascript/htmx.min.js"></script>
+        
+    </head>
+    <body>
+        <div>
+
+            {#include sidebar /}
+            {#include header /}
+            
+            <div class="orders-page">
+
+                {#fragment id=order_selection_block}
+                    <div class="order-selection-block" id="order-sel-div">
+                        {#fragment id=tab_filter}
+                        <div class="filter-tabs-container" id="tab-filter-div">
+                            <button class="filter-tab-{active}" hx-get="/pharmacy_portal/select_active_orders" hx-trigger="click" hx-target="#order-sel-div" hx-swap="outerHTML">
+                                <span>ACTIVE ORDERS</span>
+                            </button>
+                            <button class="filter-tab-{history}" hx-get="/pharmacy_portal/select_history" hx-trigger="click" hx-target="#order-sel-div" hx-swap="outerHTML">
+                                HISTORY
+                            </button>
+                        </div>
+                        {/fragment}
+                        <div class="table-container">
+                            <div class="orders-header">
+                                <span>Order Number</span>
+                                <span>Elapsed Time</span>
+                            </div>
+                            <div class="order-selectors-container">
+                                {#for order in orders}
+                                    <div class="order-select" hx-get="/pharmacy_portal/get_order/{order.id}" hx-trigger="click" hx-target="#order-details-div" hx-swap="outerHTML">
+                                        <span>{order.order_number}</span>
+                                        <div class="elapsed-time-cell">
+                                            {! @if ($tab == 'history') !}
+                                            <div class="elapsed-timer-history">
+                                                <span>00:00</span>
+                                            </div>
+                                            {! @else
+                                                <div class="elapsed-timer">
+                                                    <span>{{ date( "i:s", strtotime(now()) - strtotime($order->assigned_at)) }}</span>
+                                                </div>
+                                            @endif !}
+                                        </div>
+                                    </div>
+                                {/for}
+                            </div>
+
+                        </div>
+                    </div>
+                {/fragment}
+                
+                {#fragment id=order_details_block}
+                    <div class="order-details-block" id="order-details-div">
+                        <div class="filter-tabs-container">
+                                <button class="order-number-tab">
+                                    {#if selected_order != null}
+                                        {selected_order.order_number}
+                                    {#else}
+                                        Select an order
+                                    {/if}
+                                </button>
+                        </div>
+                        <div class="table-container-border">
+                            <div class="table-container">
+                                <div class="details-header">
+                                    <span></span>
+                                    <span>Items</span>
+                                    <span>Form</span>
+                                    <span>Quantity</span>
+                                    <span>Type</span>
+                                    <span>Price</span>
+                                    <span>Discount</span>
+                                    <span>Total Price</span>
+                                </div>
+                                {#if selected_order != null}
+                                    <div class="order-details-container">
+                                            {#for item in selected_order.order_items}
+                                                <div class='detail-select'>
+                                                    <img class='med_img' src="{item.image_url}">
+                                                    <span>{item.name}</span>
+                                                    <span>{item.form}</span>
+                                                    <span>{item.quantity}</span>
+                                                    <span>{item.unit}</span>
+                                                    <span>{item.list_price}</span>
+                                                    <span>0</span>
+                                                    <span>{item.list_price}</span>
+                                                </div>
+                                            {/for}
+                                    </div>
+                                    {! @if($active_order->status_id == 1)
+                                        @include('sub-blades.order-detail-footers.assigned')
+                                    @elseif($active_order->status_id == 2)
+                                        @include('sub-blades.order-detail-footers.approved')
+                                    @elseif($active_order->status_id == 3)
+                                        @include('sub-blades.order-detail-footers.rejected')
+                                    @elseif($active_order->status_id == 4)
+                                        @include('sub-blades.order-detail-footers.cancelled')
+                                    @elseif($active_order->status_id == 5)
+                                        @include('sub-blades.order-detail-footers.delivering')
+                                    @elseif($active_order->status_id == 6)
+                                        @include('sub-blades.order-detail-footers.delivered')
+                                    @endif !}
+                                {/if}
+                            </div>
+                        </div>
+                    </div>
+                {/fragment}
+
+            </div>
+    
+        </div>
+    </body>
+</html>

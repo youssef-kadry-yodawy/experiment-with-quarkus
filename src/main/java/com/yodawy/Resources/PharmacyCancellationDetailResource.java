@@ -1,7 +1,6 @@
 package com.yodawy.Resources;
 
 import com.yodawy.Models.PharmacyCancellationDetail;
-import com.yodawy.Models.PharmacyCancellationDetail;
 import io.quarkus.hibernate.reactive.panache.Panache;
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
 import io.smallrye.mutiny.Uni;

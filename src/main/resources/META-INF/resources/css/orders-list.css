@@ -1,0 +1,111 @@
+.order-selection-block .filter-tabs-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.order-selection-block button {
+    width: 142px;
+    height: 50px;
+    border: none;
+    color: white;
+    padding: 10px 40px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin-bottom: -1px;
+    transition: 100ms;
+    border-radius: 15px 15px 0px 0px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.order-selection-block .filter-tab-unselected {
+    background-color: #F4F4FB;
+    color: #61687A;
+    box-shadow: 0px -1px 4px;
+}
+
+.order-selection-block .filter-tab-selected {
+    background-color: #159EDA;
+    color: white;
+}
+
+.order-selection-block button:hover {
+    background-color: white;
+    color: #16A765;
+    cursor: pointer;
+}
+
+.order-selection-block .table-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+}
+
+.order-selection-block 
+.table-container 
+.orders-header {
+    display: grid;
+    grid-template-columns: 5fr 3fr;
+    grid-template-rows: 70px;
+    align-items: center;
+    background-color: white;
+    padding-right: 15px;
+    padding-left: 20px;
+    color: #61687A;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.order-selection-block 
+.table-container
+.order-selectors-container {
+    position: absolute;
+    top: 70px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-y:scroll;
+    background-color: white;
+    padding-bottom: 20px;
+    border-radius: 0 0 10px 10px;
+    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+}
+
+.order-selection-block 
+.table-container
+.order-selectors-container::-webkit-scrollbar {
+    /* Chrome */
+    display: none;  
+}
+
+.order-select {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    grid-template-rows: 40px;
+    align-items: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 15px;
+    padding-left: 20px;
+}
+
+.order-select:nth-child(even) {
+    background: white;
+}
+
+.order-select:nth-child(odd) {
+    background: rgba(244, 244, 251, 0.50);
+}
+
+.order-select:hover {
+    background-color: aqua;
+    cursor: pointer;
+}

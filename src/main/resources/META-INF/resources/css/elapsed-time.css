@@ -1,0 +1,21 @@
+.elapsed-time-cell {
+    margin-left: auto;
+    margin-right: auto;
+}
+.elapsed-timer, .elapsed-timer-history {
+    display: flex;
+    width: 60px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+}
+
+.elapsed-timer {
+    background-color: rgba(22, 167, 101, 0.2);
+    color: #16A765;
+}
+.elapsed-timer-history {
+    background-color: rgba(255, 70, 70, 0.2);
+    color: #FF4646;
+}

@@ -29,22 +29,9 @@
   </dependencyManagement>
   <dependencies>
     <dependency>
-      <groupId>com.github.javafaker</groupId>
-      <artifactId>javafaker</artifactId>
-      <version>1.0.2</version>
+        <groupId>io.quarkus</groupId>
+        <artifactId>quarkus-reactive-routes</artifactId>
     </dependency>
-    <!-- <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-agroal</artifactId>
-    </dependency> -->
-    <!-- <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-hibernate-reactive</artifactId>
-    </dependency> -->
-    <!-- <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-hibernate-reactive-panache</artifactId>
-    </dependency> -->
     <dependency>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-hibernate-reactive-rest-data-panache</artifactId>
@@ -53,10 +40,6 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-reactive-mysql-client</artifactId>
     </dependency>
-    <!-- <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-rest-client-reactive</artifactId>
-    </dependency> -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy-reactive</artifactId>
@@ -73,22 +56,6 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-qute</artifactId>
     </dependency>
-    <!-- <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-reactive-messaging-rabbitmq</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-reactive-messaging</artifactId>
-    </dependency> -->
-    <!-- <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-jdbc-mysql</artifactId>
-    </dependency> -->
-    <!-- <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-rest-client-reactive-jackson</artifactId>
-    </dependency> -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-arc</artifactId>
@@ -102,6 +69,11 @@
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.github.javafaker</groupId>
+      <artifactId>javafaker</artifactId>
+      <version>1.0.2</version>
     </dependency>
   </dependencies>
   <build>

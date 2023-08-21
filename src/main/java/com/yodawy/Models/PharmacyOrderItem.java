@@ -17,12 +17,12 @@ import java.util.Random;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class PharmacyOrderItem extends PanacheEntity {
 
-    String name;
-    Double list_price;
-    Integer quantity;
-    String image_url;
-    String form;
-    String unit;
+    public String name;
+    public Double list_price;
+    public Integer quantity;
+    public String image_url;
+    public String form;
+    public String unit;
 
     @ManyToOne
     @JoinColumn(name = "order_id", insertable = false, updatable = false)

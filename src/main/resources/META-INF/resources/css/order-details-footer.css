@@ -1,0 +1,79 @@
+.footer-container {
+    height:var(--detail_footer_height);
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #E3E3E3;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.footer-container p {
+    color: #1E2842;
+    font-size: 14px;
+    font-family: Nunito Sans;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    text-align: center;
+    margin: 10px 30px;
+}
+
+.footer-container p span {
+    color: #1E2842;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.footer-container .action-buttons-div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.footer-container .action-buttons-div button {
+    min-width: 200px;
+    border: none;
+    padding: 10px 40px;
+    font-weight: 900;
+    margin: 10px 20px 10px 20px;
+    border-radius: 8px;
+    color: #fff;
+    color: #FFF;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+.footer-container .action-buttons-div button:hover {
+    opacity: 90%;
+    cursor: pointer;
+}
+
+.footer-container .action-buttons-div .accept {
+    background-color: #16A765;
+}
+
+.footer-container .action-buttons-div .refuse {
+    background-color: #FF4646;
+}
+
+.fail-reason-div {
+    background-color: #E3E3E3;
+    border-radius: 0 0 7px 7px;
+}
+
+.fail-reason-div p {
+    color: var(--dark-gray, #9D9D9D);
+    text-align: center;
+    font-size: 22px;
+    font-family: Nunito Sans;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+}
