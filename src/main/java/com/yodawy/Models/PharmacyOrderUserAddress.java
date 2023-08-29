@@ -26,16 +26,17 @@ public class PharmacyOrderUserAddress extends PanacheEntity{
     public Integer apartment;
     public String landmark;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     public PharmacyOrderUser pharmacy_order_user;
     public Long user_id;
 
+    @JsonIgnore
     @OneToMany(
             mappedBy = "pharmacy_order_user_address",
             cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.EAGER
+            orphanRemoval = true
     )
     public List<PharmacyOrder> pharmacy_orders;
 

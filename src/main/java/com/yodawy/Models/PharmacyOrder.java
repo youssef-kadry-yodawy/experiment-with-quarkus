@@ -1,6 +1,7 @@
 package com.yodawy.Models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.github.javafaker.Faker;
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
@@ -41,27 +42,27 @@ public class PharmacyOrder extends PanacheEntity {
     public PharmacyOrderStatus pharmacy_order_status;
     public Long status_id;
 
+    @JsonIgnore
     @OneToMany(
             mappedBy = "pharmacy_order",
             cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.EAGER
+            orphanRemoval = true
     )
     public List<PharmacyOrderItem> order_items;
-
+    
+    @JsonIgnore
     @OneToMany(
             mappedBy = "pharmacy_order",
             cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.EAGER
+            orphanRemoval = true
     )
     public List<PharmacyOrderImage> order_images;
 
+    @JsonIgnore
     @OneToMany(
             mappedBy = "pharmacy_order",
             cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.EAGER
+            orphanRemoval = true
     )
     public List<PharmacyCancellationDetail> cancellation_details;
 

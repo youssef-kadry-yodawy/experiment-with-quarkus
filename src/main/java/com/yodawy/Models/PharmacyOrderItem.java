@@ -1,6 +1,7 @@
 package com.yodawy.Models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.github.javafaker.Faker;
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
@@ -24,6 +25,7 @@ public class PharmacyOrderItem extends PanacheEntity {
     public String form;
     public String unit;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "order_id", insertable = false, updatable = false)
     public PharmacyOrder pharmacy_order;

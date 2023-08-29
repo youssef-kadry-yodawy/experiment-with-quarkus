@@ -20,8 +20,7 @@ public class PharmacyOrderStatus extends PanacheEntity {
     @OneToMany(
             mappedBy = "pharmacy_order_status",
             cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.EAGER
+            orphanRemoval = true
     )
     @JsonIgnore
     public List<PharmacyOrder> pharmacy_orders;

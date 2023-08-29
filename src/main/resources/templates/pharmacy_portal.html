@@ -98,7 +98,7 @@
                                 </div>
                                 {#if selected_order != null}
                                     <div class="order-details-container">
-                                            {#for item in selected_order.order_items}
+                                            {#for item in selected_order_items}
                                                 <div class='detail-select'>
                                                     <img class='med_img' src="{item.image_url}">
                                                     <span>{item.name}</span>

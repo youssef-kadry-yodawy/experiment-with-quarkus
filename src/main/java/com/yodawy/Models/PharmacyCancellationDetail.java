@@ -1,6 +1,7 @@
 package com.yodawy.Models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
 import jakarta.persistence.Entity;
@@ -16,6 +17,7 @@ public class PharmacyCancellationDetail extends PanacheEntity {
 
     public String cancellation_note;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "order_id", insertable = false, updatable = false)
     public PharmacyOrder pharmacy_order;

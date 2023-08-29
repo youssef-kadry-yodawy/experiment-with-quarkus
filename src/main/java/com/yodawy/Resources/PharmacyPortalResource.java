@@ -2,7 +2,11 @@ package com.yodawy.Resources;
 
 import java.util.List;
 
+import org.hibernate.reactive.mutiny.Mutiny;
+
 import com.yodawy.Models.PharmacyOrder;
+
+import io.quarkus.hibernate.reactive.panache.common.WithSession;
 import io.quarkus.qute.Template;
 import io.smallrye.mutiny.Uni;
 import jakarta.inject.Inject;
@@ -67,27 +71,13 @@ public class PharmacyPortalResource {
     @GET
     @Path("/get_order/{id}")
     @Produces(MediaType.TEXT_HTML)
+    @WithSession
     public Uni<String> getOrder(@PathParam("id") Long id) {
-        // Uni<PharmacyOrder> order= PharmacyOrder.findById(id);
-
-        PharmacyOrder order = new PharmacyOrder();
-        order.order_number = "325635";
-
-        return pharmacy_portal.getFragment("order_details_block").data(
-            "selected_order", order)
-            .createUni();
+        Uni<PharmacyOrder> order = PharmacyOrder.findById(id);
+        return order.chain(selected_order -> pharmacy_portal.getFragment("order_details_block").data(
+            "selected_order", selected_order,
+            "selected_order_items", Mutiny.fetch(selected_order.order_items)).createUni());
     }
-
-    @GET
-    @Path("/select_amongus")
-    @Produces(MediaType.TEXT_HTML)
-    public Uni<String> selectAmong() {
-        Uni<List<PharmacyOrder>> orders= PharmacyOrder.list("status_id = 3 or status_id = 4 or status_id = 6");
-
-        return pharmacy_portal.getFragment("tab_filter").data("orders", orders)
-            .createUni();
-    }
-
 
 
 }
