@@ -3,14 +3,21 @@ package com.yodawy.Models;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
+import com.yodawy.pojomodels.Meds;
+
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
+import io.quarkus.logging.Log;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import org.jboss.resteasy.reactive.RestForm;
 
+import java.io.File;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 @Entity
@@ -63,14 +70,27 @@ public class PharmacyOrderItem extends PanacheEntity {
     }
 
     public PharmacyOrderItem(Faker faker, Long order_id) {
+
         Random rand = new Random();
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            List<Map<String, String>> meds = mapper.readValue(new File("./src/main/resources/json/meds.json"), Meds.class).meds;
+            Map<String,String> med = meds.get(rand.nextInt(meds.size()));
+            name = med.get("name");
+            image_url = med.get("image");
+        } catch (Exception e) {
+            Log.error(e.getClass());
+            Log.error(e.getMessage());
+            name ="failed_name";
+            image_url = "failed_image";
+        };
+
         String[] forms = {"Tablets", "Flex-pen", "Suppository"};
         String[] units = {"Pill", "Bottle", "Sachet"};
 
-        name = faker.medical().medicineName();
         list_price = faker.number().randomDouble(2,1,50);
         quantity = faker.number().numberBetween(1, 6);
-        image_url = faker.internet().url();
         form = forms[rand.nextInt(forms.length)];
         form = units[rand.nextInt(units.length)];
 

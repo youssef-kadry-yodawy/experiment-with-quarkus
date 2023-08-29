@@ -9,6 +9,7 @@ import io.smallrye.mutiny.Uni;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+
 @Path("/database-seeder")
 public class DatabaseSeeder {
 
